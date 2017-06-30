@@ -11,8 +11,8 @@
 
 ## Streaming
 
-[HBase configuration](HBase/hbase.md)
+[HBase configuration](Streaming/HBase/hbase.md)
 
-[Kudu configuration](kudu/kuduconfiguration.md)
+[Kudu configuration](Streaming/kudu/kuduconfiguration.md)
 
-[Solr configuration](Solr/Solr_documentation.md)
+[Solr configuration](Streaming/Solr/Solr_documentation.md)
