@@ -40,7 +40,7 @@ def insert_to_kudu(rdd):
       'amplitude_1': float(cols[5]),
       'amplitude_2': float(cols[6]),
       'amplitude_3': float(cols[7]),
-      'wave': cols[5] > 0.995 and cols[7] > 0.995 and cols[6] < 0.005,
+      'wave': float(cols[5]) > 0.995 and float(cols[7]) > 0.995 and float(cols[6]) < 0.005,
     })
 
     session.apply(op)
