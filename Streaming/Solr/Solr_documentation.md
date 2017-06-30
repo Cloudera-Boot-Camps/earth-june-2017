@@ -5,6 +5,8 @@ Configuration of Solr was tricky at first, we needed to figure out how to create
 
 After searching a bit, we found this site: [Example solrctl Usage](https://www.cloudera.com/documentation/enterprise/latest/topics/search_solrctl_examples.html)
 
+One of the issues we faced during the lab is that if we removed too many fields from the schema, it would load the schema correctly but it would not be able to get data (No live SolrServers available to handle this request)
+
 
 ## Solr collection configuration
 By using this documentation, we did the configuration as follow:
