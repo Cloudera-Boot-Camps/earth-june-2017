@@ -9,6 +9,27 @@ Step 2: install streamsets:
 
 ```
 [ec2-user@ip-172-31-32-134 streamsets-datacollector-2.6.0.1-all-rpms]$ sudo yum localinstall streamsets*.rpm
+```
+
+after the install, run the following:
+
+```
+Start streamsets:
+service sdc start
+```
+
+
+Using the gui, we were able to create the full model and ingest data:
+
+
+![streamsets](streamsets.png)
+
+
+
+
+
+Full log here of install:
+```
 Loaded plugins: amazon-id, rhui-lb, search-disabled-repos
 Examining streamsets-datacollector-2.6.0.1-1.noarch.rpm: streamsets-datacollector-2.6.0.1-1.noarch
 Marking streamsets-datacollector-2.6.0.1-1.noarch.rpm to be installed
