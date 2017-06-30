@@ -24,6 +24,28 @@ def get_path():
   # collide. The downside of this is that we generate a ton of files
   return "%s/%s" % (HDFS_PATH, str(int(time.time() * 1000)))
 
+def insert_to_kudu(rdd):
+  client = kudu.connect(host=KUDU_MASTER, port=7051)
+  table = client.table('galaxy_measurements')
+  session = client.new_session()
+
+  for line in rdd.toLocalIterator():
+    cols = line.split(',')
+    op = table.new_insert({
+      'measurement_id': cols[0],
+      'detector_id': int(cols[1]),
+      'galaxy_id': int(cols[2]),
+      'astrophysicist_id': int(cols[3]),
+      'measurement_time': float(cols[4]),
+      'amplitude_1': float(cols[5]),
+      'amplitude_2': float(cols[6]),
+      'amplitude_3': float(cols[7]),
+      'wave': cols[5] > 0.995 and cols[7] > 0.995 and cols[6] < 0.005,
+    })
+
+    session.apply(op)
+    session.flush()
+
 def main():
   sc = SparkContext(appName="PythonStreamingKafka")
   ssc = StreamingContext(sc, 10)
@@ -32,19 +54,9 @@ def main():
   lines = kvs.map(lambda x: x[1])
 
   if TO_KUDU:
-    k_client = kudu.connect(host=KUDU_MASTER, port=7051)
-    k_table = k_client.table('galaxy_measurements')
-    session = k_client.new_session()
-
-    def kudu_insert(line):
-      op = k_table.new_insert({'measurement_id': line})
-      session.apply(op)
-
-    #lines.map(lambda line: kudu_insert)
-    lines.foreachRDD(lambda rdd: rdd.map(lambda line: kudu_insert))
+    lines.foreachRDD(insert_to_kudu)
     lines.pprint()
 
-    session.flush()
 
   if TO_HDFS:
     lines.foreachRDD(lambda rdd: rdd.saveAsTextFile(get_path()) if rdd.count() != 0 else None)
