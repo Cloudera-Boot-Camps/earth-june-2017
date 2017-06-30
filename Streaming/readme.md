@@ -58,7 +58,7 @@ kafka-console-consumer --zookeeper ip-172-31-47-126.us-west-2.compute.internal:2
 # Run spark streaming script
 ```
 SPARK_EX_JAR=/opt/cloudera/parcels/CDH-5.11.1-1.cdh5.11.1.p0.4/lib/spark/lib/spark-examples.jar
-spark-submit --master yarn --conf "spark.dynamicAllocation.enabled=false" --jars $SPARK_EX_JAR spark_streaming.py
+spark-submit --master yarn --conf "spark.dynamicAllocation.enabled=false" --driver-memory 4g --executor-memory 2g --jars $SPARK_EX_JAR spark_streaming.py
 ```
 
 # Spark streaming
