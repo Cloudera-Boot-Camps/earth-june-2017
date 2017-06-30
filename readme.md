@@ -4,6 +4,10 @@
 
 ## Ingest
 
+
+## Batch
+
+
 ## Streaming
 
 [HBase configuration](HBase/hbase.md)
