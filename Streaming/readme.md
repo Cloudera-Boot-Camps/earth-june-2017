@@ -1,3 +1,6 @@
+In addition to doing everything manually and using cloudera manager, we also
+tried using StreamSets which was much easier and quicker to use. Notes for
+StreamSets are [here](streamsets.md)
 
 # The Flume config:
 Once we were able to write directly to an hbase sink, we commented out
