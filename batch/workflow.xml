@@ -1,0 +1,117 @@
+
+
+<workflow-app name="workflow" xmlns="uri:oozie:workflow:0.5">
+    <start to="fork-9322"/>
+    <kill name="Kill">
+        <message>Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+    </kill>
+    <action name="subworkflow-4248">
+        <sub-workflow>
+            <app-path>${nameNode}/user/hue/oozie/workspaces/hue-oozie-1498686077.46</app-path>
+              <propagate-configuration/>
+            <configuration>
+                <property>
+                    <name>TABLE</name>
+                    <value>galaxies</value>
+                </property>
+                <property>
+                    <name>TABLE_UP</name>
+                    <value>GALAXIES</value>
+                </property>
+                <property>
+                    <name>hue-id-w</name>
+                    <value>372</value>
+                </property>
+            </configuration>
+        </sub-workflow>
+        <ok to="join-5455"/>
+        <error to="Kill"/>
+    </action>
+    <action name="subworkflow-3c37">
+        <sub-workflow>
+            <app-path>${nameNode}/user/hue/oozie/workspaces/hue-oozie-1498686077.46</app-path>
+              <propagate-configuration/>
+            <configuration>
+                <property>
+                    <name>TABLE</name>
+                    <value>measurements</value>
+                </property>
+                <property>
+                    <name>TABLE_UP</name>
+                    <value>MEASUREMENTS</value>
+                </property>
+                <property>
+                    <name>hue-id-w</name>
+                    <value>372</value>
+                </property>
+            </configuration>
+        </sub-workflow>
+        <ok to="join-5455"/>
+        <error to="Kill"/>
+    </action>
+    <fork name="fork-9322">
+        <path start="subworkflow-4248" />
+        <path start="subworkflow-3c37" />
+        <path start="subworkflow-3db1" />
+        <path start="subworkflow-f443" />
+    </fork>
+    <join name="join-5455" to="End"/>
+    <action name="subworkflow-3db1">
+        <sub-workflow>
+            <app-path>${nameNode}/user/hue/oozie/workspaces/hue-oozie-1498686077.46</app-path>
+              <propagate-configuration/>
+            <configuration>
+                <property>
+                    <name>TABLE</name>
+                    <value>astrophysicists</value>
+                </property>
+                <property>
+                    <name>TABLE_UP</name>
+                    <value>ASTROPHYSICISTS</value>
+                </property>
+                <property>
+                    <name>hue-id-w</name>
+                    <value>372</value>
+                </property>
+            </configuration>
+        </sub-workflow>
+        <ok to="join-5455"/>
+        <error to="Kill"/>
+    </action>
+    <action name="subworkflow-f443">
+        <sub-workflow>
+            <app-path>${nameNode}/user/hue/oozie/workspaces/hue-oozie-1498686077.46</app-path>
+              <propagate-configuration/>
+            <configuration>
+                <property>
+                    <name>TABLE</name>
+                    <value>detectors</value>
+                </property>
+                <property>
+                    <name>TABLE_UP</name>
+                    <value>DETECTORS</value>
+                </property>
+                <property>
+                    <name>hue-id-w</name>
+                    <value>372</value>
+                </property>
+            </configuration>
+        </sub-workflow>
+        <ok to="join-5455"/>
+        <error to="Kill"/>
+    </action>
+    <join name="join-5455" to="hive2-156d"/>
+    <action name="hive2-156d" cred="hive2">
+        <hive2 xmlns="uri:oozie:hive2-action:0.1">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <jdbc-url>jdbc:hive2://ip-172-31-47-126.us-west-2.compute.internal:10000/default</jdbc-url>
+            <script>/user/hdfs/hive_table.hql</script>
+        </hive2>
+        <ok to="End"/>
+        <error to="Kill"/>
+    </action>
+    <end name="End"/>
+</workflow-app>
+
+
