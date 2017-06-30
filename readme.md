@@ -6,7 +6,7 @@
 [Ingest](ingest/readme.md)
 
 ## Batch
-[Batch](batch/batch_hotes.md)
+[Batch](batch/batch_notes.md)
 
 
 ## Streaming
