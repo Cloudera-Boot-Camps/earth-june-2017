@@ -3,9 +3,10 @@
 ![](pics/earth_data.jpg)
 
 ## Ingest
-
+[Ingest](ingest/readme.md)
 
 ## Batch
+[Batch](batch/batch_hotes.md)
 
 
 ## Streaming
