@@ -18,3 +18,8 @@
 [Kudu configuration](Streaming/Kudu/kudu_configuration.md)
 
 [Solr configuration](Streaming/Solr/Solr_documentation.md)
+
+## Bonus
+We installed and configured StreamSets on the cluster to help us go faster in testing and finding configuration issues with the environment before trying the code.
+
+[StreamSets](Streaming/streamsets.md)
