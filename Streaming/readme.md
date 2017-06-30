@@ -64,7 +64,8 @@ spark-submit --master yarn --conf "spark.dynamicAllocation.enabled=false" --jars
 # Spark streaming
 Note, we attempted to do spark streaming in scala and python. The scripts are in the `Streaming`
 directory. For scala, we were able to write to hdfs and hbase. For python, we were able
-to write to hdfs and attempted to write to kudu but experienced some problems.
+to write to hdfs and to kudu. Pyspark errors are not always helpful, often times it prints
+the error location as the location in the java library code.
 
 # To install kudu-python:
 In order to install the kudu python client for use in spark, some amount of work was needed:
